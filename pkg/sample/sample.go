@@ -78,9 +78,6 @@ func (p *sample) Update(_ context.Context, request *pb.Thing) (*pb.Thing, error)
 		return nil, status.Errorf(codes.NotFound, "id %s not found", request.Id)
 	}
 
-	p.m.Lock()
-	defer p.m.Unlock()
-
 	p.things[request.Id] = request
 	return request, nil
 }

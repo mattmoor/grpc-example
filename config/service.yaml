@@ -7,3 +7,5 @@ spec:
     spec:
       containers:
       - image: ko://github.com/mattmoor/grpc-example/cmd/server
+        ports:
+        - name: h2c # http/2 is needed for GRPC
