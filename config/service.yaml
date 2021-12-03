@@ -1,0 +1,9 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: foo
+spec:
+  template:
+    spec:
+      containers:
+      - image: ko://github.com/mattmoor/grpc-example/cmd/server

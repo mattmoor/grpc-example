@@ -1,0 +1,4 @@
+# vegeta -cpus=1 attack -duration=30s -rate=1000/1s -targets=attack.log | vegeta report -type='hist[0,10ms,100ms,1s,10s]'
+GET https://foo.default.mattmoor.dev/v1/things
+
+# To do POSTs see: https://github.com/tsenart/vegeta#targets-with-custom-bodies

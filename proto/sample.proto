@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "github.com/mattmoor/grpc-example/proto";
+
+package proto;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service SampleService {
+  rpc Create(Thing) returns (Thing) {
+    option (google.api.http) = {
+      post: "/v1/things"
+      body: "*"
+    };
+  }
+
+  rpc Update(Thing) returns (Thing) {
+    option (google.api.http) = {
+      put: "/v1/things/{id}"
+      body: "*"
+    };
+  }
+
+  rpc List(ThingFilter) returns (ThingList) {
+    option (google.api.http) = {
+      get: "/v1/things"
+    };
+  }
+
+  rpc Delete(DeleteThingRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/things/{id}"
+    };
+  }
+}
+
+message Thing {
+  string id = 1;
+
+  string field1 = 2;
+  string field2 = 3;
+}
+
+message ThingList {
+    repeated Thing items = 1;
+}
+
+message ThingFilter {
+  string id = 1;
+}
+
+message DeleteThingRequest {
+  string id = 1;
+}
