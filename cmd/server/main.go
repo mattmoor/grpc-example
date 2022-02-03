@@ -9,9 +9,10 @@ import (
 	"log"
 
 	"github.com/kelseyhightower/envconfig"
+	"knative.dev/pkg/logging"
 	"knative.dev/pkg/signals"
 
-	"github.com/mattmoor/grpc-example/pkg/duplex"
+	"chainguard.dev/go-grpc-kit/pkg/duplex"
 	"github.com/mattmoor/grpc-example/pkg/sample"
 	pb "github.com/mattmoor/grpc-example/proto"
 )
@@ -35,6 +36,7 @@ func main() {
 		log.Panicf("Failed to register gateway endpoint: %v", err)
 	}
 
+	logging.FromContext(ctx).Infof("Duplex gRPC/HTTP server starting on port %d", env.Port)
 	if err := d.ListenAndServe(ctx); err != nil {
 		log.Panicf("ListenAndServe() = %v", err)
 	}
